@@ -105,6 +105,7 @@ push_i:
 
 end_loop:
     li s5, 0
+    addi s3, s3, -1
     
 print_loop:
     bge s5, s3, print_done # if index >= n done
@@ -121,6 +122,15 @@ print_loop:
     j print_loop
 
 print_done:
+    
+    slli t1, s5, 2
+    add t1, s1, t1
+    lw t2, 0(t1)
+    
+    la a0, scan_fmt
+    mv a1, t2
+    call printf
+    
     la a0, newline
     call printf
 
